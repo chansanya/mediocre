@@ -8,10 +8,14 @@ ext {
             javaVersion = JavaVersion.VERSION_17
     ]
     libraries = [
-            mybatisPlusVersion = '3.5.10',
+            mybatisPlusVersion = '3.5.2.7-SNAPSHOT',
+            hutoolVersion = '5.8.10',
+            druidVersion = '1.2.15',
     ]
     lib = [
-            "mybatis-plus": "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}",
+            "mybatisPlus": "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}",
+            "hutool": "cn.hutool:hutool-all:${hutoolVersion}",
+            "druid": "com.alibaba:druid-spring-boot-starter:${druidVersion}",
     ]
 }
 
@@ -21,6 +25,7 @@ description = "Mediocre is not mediocre"
 subprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
+
 
     apply plugin: "org.springframework.boot"
     apply plugin: "io.spring.dependency-management"
@@ -37,8 +42,10 @@ subprojects {
     }
 
 
-    tasks.withType(JavaCompile) {
-        options.encoding = "UTF-8"
+    tasks.withType(JavaCompile).tap {
+        configureEach {
+            options.encoding = "UTF-8"
+        }
     }
 
 }

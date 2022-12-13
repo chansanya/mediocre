@@ -1,0 +1,16 @@
+///**
+// * 骨架核心模块
+// */
+//module Mediocre.med.core.main {
+//
+//    requires spring.web;
+//    requires spring.webmvc;
+//    requires lombok;
+//    requires spring.core;
+//    requires com.baomidou.mybatis.plus.core;
+//    requires com.baomidou.mybatis.plus.extension;
+//    requires spring.beans;
+//    requires annotations;
+//    exports com.chansan;
+//
+//}

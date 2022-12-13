@@ -1,0 +1,8 @@
+
+dependencies {
+    api project(":med-core")
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "${lib."druid"}"
+    implementation 'mysql:mysql-connector-java'
+}
+
