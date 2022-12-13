@@ -21,6 +21,7 @@ description = "Mediocre is not mediocre"
 subprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
+
     apply plugin: "org.springframework.boot"
     apply plugin: "io.spring.dependency-management"
 
@@ -36,6 +37,10 @@ subprojects {
     }
 
 
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
 
 }
+
 

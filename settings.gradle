@@ -17,4 +17,5 @@ buildscript {
 
 rootProject.name = 'Mediocre'
 include 'med-web'
+include 'med-core'
 

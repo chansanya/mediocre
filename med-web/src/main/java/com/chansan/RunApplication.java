@@ -3,14 +3,7 @@ package com.chansan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * @name: $NAME
- * @author£º yf
- * @classPath: com.chansan.$NAME
- * @date: $DATE
- * @Version: 1.0
- * @description: ÎÄ¼þÃèÊö:
- */
+
 @SpringBootApplication
 public class RunApplication {
 
