@@ -1,2 +1,20 @@
+buildscript {
+    repositories {
+        maven { url "https://maven.aliyun.com/nexus/content/groups/public" }
+        maven { url "https://maven.aliyun.com/nexus/content/repositories/gradle-plugin" }
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10"
+        classpath "io.freefair.gradle:lombok-plugin:6.5.0.3"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:3.0.0"
+        classpath 'io.spring.gradle:dependency-management-plugin:1.1.0'
+    }
+}
+
 rootProject.name = 'Mediocre'
+include 'med-web'
 
