@@ -1,4 +1,4 @@
-package com.chansan.common.resp;
+package com.chansan.common.base.resp;
 
 import java.util.HashMap;
 
@@ -94,7 +94,7 @@ public class AjaxResult extends HashMap<String, Object> {
      * @return 成功消息
      */
     public static AjaxResult success(String msg, Object data) {
-        return new AjaxResult(HttpStatus.SUCCESS, msg, data);
+        return new AjaxResult(RespStatus.SUCCESS, msg, data);
     }
 
     /**
@@ -124,7 +124,7 @@ public class AjaxResult extends HashMap<String, Object> {
      * @return 警告消息
      */
     public static AjaxResult error(String msg, Object data) {
-        return new AjaxResult(HttpStatus.ERROR, msg, data);
+        return new AjaxResult(RespStatus.ERROR, msg, data);
     }
 
     /**

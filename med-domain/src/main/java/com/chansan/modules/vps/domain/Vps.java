@@ -1,4 +1,4 @@
-package com.chansan.core;
+package com.chansan.modules.vps.domain;
 
 import java.io.Serializable;
 

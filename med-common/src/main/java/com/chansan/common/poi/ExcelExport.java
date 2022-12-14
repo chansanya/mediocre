@@ -1,4 +1,4 @@
-package com.chansan.common.utils.poi;
+package com.chansan.common.poi;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

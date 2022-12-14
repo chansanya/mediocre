@@ -16,14 +16,18 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class InsertOrUpdateFillHandler implements MetaObjectHandler {
 
+    private static final String CREATE_TIME = "createTime";
+    private static final String CREATE_BY = "createBy";
+    private static final String UPDATE_TIME = "updateTime";
+    private static final String UPDATE_BY = "updateBy";
     @Override
     public void insertFill(MetaObject metaObject) {
         //新增时策略
         //创建时间
-        this.strictInsertFill(metaObject, "createTime", Date::new, Date.class);
+        this.strictInsertFill(metaObject, CREATE_TIME, Date::new, Date.class);
 
         try {
-            this.strictInsertFill(metaObject, "createBy", Long.class, SecurityUtils.getUserId());
+            this.strictInsertFill(metaObject, CREATE_BY, Long.class, SecurityUtils.getUserId());
         } catch (Exception e) {
             log.error("insert 自动填充异常", e);
         }
@@ -33,10 +37,10 @@ public class InsertOrUpdateFillHandler implements MetaObjectHandler {
     public void updateFill(MetaObject metaObject) {
         //修改时策略
         //修改时间
-        this.strictUpdateFill(metaObject, "updateTime", Date::new, Date.class);
+        this.strictUpdateFill(metaObject, UPDATE_TIME, Date::new, Date.class);
         //修改者
         try {
-            this.strictUpdateFill(metaObject, "updateBy", Long.class, SecurityUtils.getUserId());
+            this.strictUpdateFill(metaObject, UPDATE_BY, Long.class, SecurityUtils.getUserId());
         } catch (Exception e) {
             log.error("update 自动填充异常", e);
         }

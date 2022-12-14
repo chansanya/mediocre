@@ -1,4 +1,4 @@
-package com.chansan.core.handler;
+package com.chansan.core.annotations;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 /**
  * @name: IgnoreGlobalResp
  * @author: leihuangyan
- * @classPath: com.chansan.core.handler.IgnoreGlobalResp
+ * @classPath: com.chansan.core.annotations.IgnoreGlobalResp
  * @date: 2022/12/13
  * @description:
  */

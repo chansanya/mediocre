@@ -1,4 +1,4 @@
-package com.chansan.core.handler;
+package com.chansan.core.web.handler;
 
 import java.lang.reflect.Method;
 
@@ -11,7 +11,8 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import com.chansan.common.resp.AjaxResult;
+import com.chansan.common.base.resp.AjaxResult;
+import com.chansan.core.annotations.IgnoreGlobalResp;
 
 import lombok.extern.slf4j.Slf4j;
 

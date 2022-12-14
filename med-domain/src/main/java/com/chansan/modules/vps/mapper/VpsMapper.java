@@ -1,8 +1,8 @@
-package com.chansan.core.mapper;
+package com.chansan.modules.vps.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.chansan.core.Vps;
+import com.chansan.modules.vps.domain.Vps;
 
 /**
  * @name: VpsMapper
