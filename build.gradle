@@ -15,7 +15,7 @@ ext {
     lib = [
             "mybatisPlus": "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}",
             "hutool": "cn.hutool:hutool-all:${hutoolVersion}",
-            "druid": "com.alibaba:druid-spring-boot-starter:${druidVersion}",
+//            "druid": "com.alibaba:druid-spring-boot-starter:${druidVersion}",
     ]
 }
 

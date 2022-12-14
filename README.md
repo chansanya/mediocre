@@ -6,3 +6,8 @@
 * **Resource 包名变更** 
   * javax.annotation.Resource >>> jakarta.annotation.Resource [详情](https://jiagoushi.pro/book/export/html/579)
   
+
+## 引入组件
+* [mybatis-plus](https://baomidou.com/pages/24112f/)
+* [spring-boot-starter-actuator](https://docs.spring.io/spring-boot/docs/3.0.0/actuator-api/htmlsingle/)
+* [hutool](https://hutool.cn/)

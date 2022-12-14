@@ -5,6 +5,7 @@ dependencies {
     api project(":med-common")
     implementation 'org.springframework.boot:spring-boot-starter-web'
     api "${lib."mybatisPlus"}"
+//    api 'org.springframework.boot:spring-boot-starter-data-solr'
 //    implementation "${lib."druid"}"
     api 'mysql:mysql-connector-java'
 }
