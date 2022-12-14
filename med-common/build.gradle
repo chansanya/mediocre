@@ -4,4 +4,7 @@ dependencies {
     api "${lib."hutool"}"
     implementation "org.apache.poi:poi-ooxml:4.1.2"
     implementation "org.slf4j:slf4j-api"
+    implementation "com.fasterxml.jackson.core:jackson-databind"
+    implementation "org.apache.tomcat.embed:tomcat-embed-core"
+
 }

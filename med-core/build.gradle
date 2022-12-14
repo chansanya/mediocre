@@ -4,6 +4,7 @@ apply plugin: 'kotlin'
 dependencies {
     api project(":med-domain")
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 //    api 'org.springframework.boot:spring-boot-starter-data-solr'
 //    implementation "${lib."druid"}"
     api 'mysql:mysql-connector-java'
