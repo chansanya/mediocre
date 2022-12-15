@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import com.chansan.common.base.resp.AjaxResult;
 import com.chansan.core.security.authentication.CaptchaAuthenticationProvider;
 import com.chansan.core.security.userdetails.CaptchaDetailsServiceImpl;
-import com.chansan.modules.sms.ISmsService;
+import com.chansan.domain.sms.ISmsService;
 
 import lombok.extern.slf4j.Slf4j;
 

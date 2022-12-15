@@ -20,4 +20,5 @@ include 'med-web'
 include 'med-core'
 include 'med-common'
 include 'med-domain'
+include 'med-extension'
 

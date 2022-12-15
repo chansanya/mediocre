@@ -20,7 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.util.Assert;
 
-import com.chansan.modules.sms.ISmsService;
+import com.chansan.domain.sms.ISmsService;
 
 import lombok.extern.slf4j.Slf4j;
 

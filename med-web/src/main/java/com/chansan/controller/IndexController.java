@@ -10,7 +10,7 @@ import com.chansan.common.exception.ServiceException;
 import com.chansan.common.exception.UtilException;
 import com.chansan.common.exception.WebSocketException;
 import com.chansan.core.annotations.IgnoreGlobalResp;
-import com.chansan.modules.vps.domain.Vps;
+import com.chansan.domain.vps.domain.Vps;
 
 /**
  * @author yf

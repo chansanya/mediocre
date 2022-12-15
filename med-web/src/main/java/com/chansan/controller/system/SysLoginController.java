@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chansan.common.base.resp.AjaxResult;
-import com.chansan.modules.system.domain.login.LoginBody;
-import com.chansan.modules.system.service.impl.SysLoginService;
+import com.chansan.domain.system.domain.login.LoginBody;
+import com.chansan.domain.system.service.impl.SysLoginService;
 
 
 import jakarta.annotation.Resource;

@@ -7,9 +7,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.chansan.modules.system.domain.user.SysUser;
-import com.chansan.modules.system.domain.login.LoginUser;
-import com.chansan.modules.system.service.ISysUserService;
+import com.chansan.domain.system.domain.user.SysUser;
+import com.chansan.domain.system.domain.login.LoginUser;
+import com.chansan.domain.system.service.ISysUserService;
 
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
