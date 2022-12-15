@@ -1,6 +1,7 @@
 package com.chansan.modules.base;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Entity基类
@@ -8,10 +9,9 @@ import lombok.Data;
  * @author rourou
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class DelFlag extends BaseEntity {
-
-    private static final long serialVersionUID = 1L;
     /** 逻辑删除 */
-    private Boolean flag;
+    private Boolean delFlag;
 
 }

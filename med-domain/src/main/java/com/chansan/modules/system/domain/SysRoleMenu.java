@@ -1,13 +1,18 @@
 package com.chansan.modules.system.domain;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 角色和菜单关联 sys_role_menu
  * 
  * @author rourou
  */
+@TableName("sys_role_menu")
 @Data
+@Accessors(chain = true)
 public class SysRoleMenu  {
     /** 角色ID */
     private Long roleId;

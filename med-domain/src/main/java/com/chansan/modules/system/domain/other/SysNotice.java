@@ -1,15 +1,21 @@
-package com.chansan.modules.system.domain;
+package com.chansan.modules.system.domain.other;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.chansan.modules.base.DelFlag;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * 通知公告表 sys_notice
  *
  * @author rourou
  */
+@TableName("sys_notice")
 @Data
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
 public class SysNotice extends DelFlag {
 
     private static final long serialVersionUID = 1L;
