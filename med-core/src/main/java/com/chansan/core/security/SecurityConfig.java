@@ -1,16 +1,15 @@
 package com.chansan.core.security;
 
 
-import java.util.HashSet;
-
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -19,12 +18,11 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import com.chansan.common.base.resp.AjaxResult;
 import com.chansan.core.security.authentication.CaptchaAuthenticationProvider;
 import com.chansan.core.security.filter.JwtAuthenticationTokenFilter;
 import com.chansan.core.security.handle.AuthenticationEntryPointImpl;
 import com.chansan.core.security.handle.LogoutSuccessHandlerImpl;
-import com.chansan.modules.sms.ISmsService;
+import com.chansan.core.security.userdetails.UserPwdDetailsServiceImpl;
 
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +35,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Configuration
 @EnableWebSecurity
-//@EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
 
@@ -139,57 +136,37 @@ public class SecurityConfig {
         // 添加CORS filter
         httpSecurity.addFilterBefore(corsFilter(), JwtAuthenticationTokenFilter.class);
         httpSecurity.addFilterBefore(corsFilter(), LogoutFilter.class);
+
         return httpSecurity.build();
     }
 
 
-    @Bean
-    @Qualifier("captchaUserDetailsService")
-    public UserDetailsService captchaUserDetailsService() {
-        log.info(">>>>>>>captchaUserDetailsService");
-        return phone -> new LoginUser(new HashSet<>());
-    }
+    @Resource
+    private  CaptchaAuthenticationProvider captchaAuthenticationProvider;
+
+//    @Resource
+//    private  UserPassAuthenticationProvider userPassAuthenticationProvider;
+
+
+//    @Bean
+//    public AuthenticationManager authenticationManagerBean(ObjectPostProcessor<Object> objectPostProcessor) {
+//
+//        AuthenticationManagerBuilder authenticationManagerBuilder = new AuthenticationManagerBuilder(objectPostProcessor);
+//        authenticationManagerBuilder.userDetailsService(userPassAuthenticationProvider)
+//        authenticationManagerBuilder.authenticationProvider(captchaAuthenticationProvider)
+//                .authenticationProvider(userPassAuthenticationProvider);
+//        return authenticationManagerBuilder.getOrBuild();
+//    }
 
     @Bean
-    @Qualifier("userDetailsServiceImpl")
-    public UserDetailsService userDetailsServiceImpl() {
-        log.info(">>>>>>>userDetailsServiceImpl");
-        return phone -> new LoginUser(new HashSet<>());
+    public AuthenticationManager authenticationManagerBean(ObjectPostProcessor<Object> objectPostProcessor,
+                                                           UserPwdDetailsServiceImpl userPwdDetailsService) throws Exception {
+
+        AuthenticationManagerBuilder authenticationManagerBuilder = new AuthenticationManagerBuilder(objectPostProcessor);
+        authenticationManagerBuilder.userDetailsService(userPwdDetailsService).passwordEncoder(bCryptPasswordEncoder());
+        authenticationManagerBuilder.authenticationProvider(captchaAuthenticationProvider);
+        return authenticationManagerBuilder.getOrBuild();
     }
-
-
-    @Bean
-    @Qualifier("smsService")
-    public ISmsService smsService() {
-        log.info(">>>>>>>smsService");
-        return new ISmsService() {
-            @Override
-            public AjaxResult sendCheckCode(String phoneNumbers) {
-                return AjaxResult.success();
-            }
-
-            @Override
-            public AjaxResult sendMsg(String content, String... phoneNumbers) {
-                return AjaxResult.success();
-            }
-
-            @Override
-            public boolean verifyCaptcha(String phone, String code) {
-                return Boolean.TRUE;
-            }
-        };
-    }
-
-    /**
-     * 验证码认证器.
-     */
-    @Bean
-    public CaptchaAuthenticationProvider captchaAuthenticationProvider(ISmsService smsService,
-                                                                       @Qualifier("captchaUserDetailsService") UserDetailsService userDetailsService
-    ) {
-        return new CaptchaAuthenticationProvider(userDetailsService, smsService);
-    }
-
 
 
 
@@ -197,15 +174,6 @@ public class SecurityConfig {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-//    /**
-//     * 身份认证接口
-//     */
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService).passwordEncoder();
-//        auth.authenticationProvider(captchaAuthenticationProvider);
-//    }
 
 
 }

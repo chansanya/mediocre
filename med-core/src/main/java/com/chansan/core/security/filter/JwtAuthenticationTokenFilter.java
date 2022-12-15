@@ -26,10 +26,11 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 //        if (StringUtils.isNotNull(loginUser) && StringUtils.isNull(SecurityUtils.getAuthentication())) {
 //            //解析token获取用户信息不为空 且 SecurityContextHolder 授权为空 刷新token
 //            tokenService.verifyToken(loginUser);
-//            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
+//            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken("admin", null, loginUser.getAuthorities());
 //            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 //            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 //        }
+        logger.info("JwtAuthenticationTokenFilter >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         chain.doFilter(request, response);
     }
 }

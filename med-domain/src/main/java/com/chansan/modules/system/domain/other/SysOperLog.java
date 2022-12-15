@@ -1,10 +1,13 @@
-package com.chansan.modules.system.domain;
+package com.chansan.modules.system.domain.other;
 
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.chansan.modules.base.DelFlag;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * 操作日志记录表 oper_log
@@ -12,7 +15,10 @@ import lombok.Data;
  * @author rourou
  */
 
+@TableName("sys_operlog")
 @Data
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
 public class SysOperLog extends DelFlag {
 
     private static final long serialVersionUID = 1L;

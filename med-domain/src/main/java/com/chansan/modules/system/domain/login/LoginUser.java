@@ -1,10 +1,12 @@
-package com.chansan.core.security;
+package com.chansan.modules.system.domain.login;
 
 import java.util.Collection;
 import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.chansan.modules.system.domain.user.SysUser;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -66,54 +68,26 @@ public class LoginUser implements UserDetails {
      * 权限列表
      */
     private Set<String> permissions;
+    private SysUser  user;
 
 
-    public Long getUserId() {
-        return userId;
-    }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getDeptId() {
-        return deptId;
-    }
-
-    public void setDeptId(Long deptId) {
-        this.deptId = deptId;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public LoginUser() {
-    }
-
-    public LoginUser( Set<String> permissions) {
+    public LoginUser( SysUser user,Set<String> permissions) {
         this.permissions = permissions;
+        this.user = user;
     }
 
-    public LoginUser(Long userId, Long deptId,Set<String> permissions) {
-        this.userId = userId;
-        this.deptId = deptId;
-        this.permissions = permissions;
-    }
+
 
 
     @Override
     public String getPassword() {
-        return "";
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return "";
+        return user.getUserName();
     }
 
 

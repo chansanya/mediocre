@@ -1,4 +1,4 @@
-package com.chansan.modules.system.domain;
+package com.chansan.modules.system.domain.other;
 
 import lombok.Data;
 

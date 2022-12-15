@@ -1,16 +1,22 @@
 package com.chansan.modules.system.domain;
 
-import com.chansan.modules.base.DelFlag;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.chansan.modules.base.BaseEntity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * 岗位表 sys_post
  *
  * @author rourou
  */
+@TableName("sys_post")
 @Data
-public class SysPost extends DelFlag {
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
+public class SysPost extends BaseEntity {
 
 
     /**

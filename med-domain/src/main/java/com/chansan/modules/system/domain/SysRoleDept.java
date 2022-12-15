@@ -1,6 +1,9 @@
 package com.chansan.modules.system.domain;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -9,7 +12,9 @@ import lombok.extern.slf4j.Slf4j;
  * @author rourou
  */
 @Slf4j
+@TableName("sys_role_dept")
 @Data
+@Accessors(chain = true)
 public class SysRoleDept {
 
     /**

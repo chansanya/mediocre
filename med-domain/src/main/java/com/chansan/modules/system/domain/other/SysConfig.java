@@ -1,15 +1,21 @@
-package com.chansan.modules.system.domain;
+package com.chansan.modules.system.domain.other;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.chansan.modules.base.DelFlag;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * 参数配置表 sys_config
  * 
  * @author rourou
  */
+@TableName("sys_config")
 @Data
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
 public class SysConfig extends DelFlag {
 
     /** 参数主键 */
