@@ -37,6 +37,7 @@ subprojects {
     repositories {
         mavenLocal()
         maven { url "https://maven.aliyun.com/repository/public" }
+        //MP 快照仓库
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         mavenCentral()
     }
