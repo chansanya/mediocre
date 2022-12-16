@@ -11,10 +11,12 @@ ext {
             mybatisPlusVersion = '3.5.2.7-SNAPSHOT',
             hutoolVersion = '5.8.10',
             druidVersion = '1.2.15',
+            alidnsVersion = '3.0.1',
     ]
     lib = [
             "mybatisPlus": "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}",
             "hutool": "cn.hutool:hutool-all:${hutoolVersion}",
+            "alidns": "com.aliyun:alidns20150109:${alidnsVersion}",
 //            "druid": "com.alibaba:druid-spring-boot-starter:${druidVersion}",
     ]
 }
@@ -25,11 +27,8 @@ description = "Mediocre is not mediocre"
 subprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
-
-
     apply plugin: "org.springframework.boot"
     apply plugin: "io.spring.dependency-management"
-
     apply plugin: "io.freefair.lombok"
 
     sourceCompatibility = "${javaVersion}"

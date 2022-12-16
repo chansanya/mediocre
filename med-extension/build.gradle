@@ -1,5 +1,5 @@
 dependencies {
-    implementation 'com.aliyun:alidns20150109:3.0.1'
+    implementation "${lib."alidns"}"
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'

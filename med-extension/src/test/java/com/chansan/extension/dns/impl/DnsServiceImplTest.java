@@ -29,7 +29,7 @@ class DnsServiceImplTest {
 
 
 //    private final  static  String  DOMAIN_NAME = "seeyou.love";
-        private final  static  String  DOMAIN_NAME = "lovefile.cn";
+    private final  static  String  DOMAIN_NAME = "lovefile.cn";
 
     private final  static  String  RECORD_ID = "801828089609678848";
 

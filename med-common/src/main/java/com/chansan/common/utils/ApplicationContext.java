@@ -30,8 +30,6 @@ public class ApplicationContext {
         long applicationId = get();
         if (applicationId == 0) {
             return 1L == userId;
-        } else if (applicationId == 1580004418631360514L) {
-            return 123L == userId;
         }
         return false;
     }
@@ -43,8 +41,6 @@ public class ApplicationContext {
         long applicationId = get();
         if (applicationId == 0) {
             return 1L == roleId;
-        } else if (applicationId == 1580004418631360514L) {
-            return 3L == roleId;
         }
         return false;
     }
