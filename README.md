@@ -12,6 +12,7 @@
 * [spring-boot-starter-actuator](https://docs.spring.io/spring-boot/docs/3.0.0/actuator-api/htmlsingle/)
 * [spring-boot-starter-security](https://docs.spring.io/spring-security/reference/whats-new.html)
 * [hutool](https://hutool.cn/)
+* [velocity](https://velocity.apache.org/)
 * 
 
 ### 注意事项
