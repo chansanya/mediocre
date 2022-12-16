@@ -236,8 +236,8 @@ public class EntityUtil {
         log.info("源资源:{}",sourceList);
         log.info("目标资源:{}",targetList);
 
-        Map<Object, List<S>> sourceMap = sourceList.stream().filter(i -> null != sourceMarkField.get(i)).collect(Collectors.groupingBy(sourceMarkField::get));
-        Map<Object, List<T>> targetMap = targetList.stream().filter(i -> null != targetMarkField.get(i)).collect(Collectors.groupingBy(targetMarkField::get));
+        Map<Object, List<S>> sourceMap = sourceList.stream().collect(Collectors.groupingBy(sourceMarkField::get));
+        Map<Object, List<T>> targetMap = targetList.stream().collect(Collectors.groupingBy(targetMarkField::get));
 
 
         MapperMethod [] mapperMethods = new MapperMethod[mapperField.length];

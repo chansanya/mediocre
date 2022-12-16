@@ -12,12 +12,14 @@ ext {
             hutoolVersion = '5.8.10',
             druidVersion = '1.2.15',
             alidnsVersion = '3.0.1',
+            velocityVersion = '2.3',
+
     ]
     lib = [
             "mybatisPlus": "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}",
             "hutool": "cn.hutool:hutool-all:${hutoolVersion}",
             "alidns": "com.aliyun:alidns20150109:${alidnsVersion}",
-//            "druid": "com.alibaba:druid-spring-boot-starter:${druidVersion}",
+            "velocity": "org.apache.velocity:velocity-engine-core:${velocityVersion}",
     ]
 }
 

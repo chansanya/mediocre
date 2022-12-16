@@ -1,0 +1,13 @@
+[common]
+server_addr = ${serverAddr}
+server_port = ${serverPort}
+token = ${token}
+
+#foreach ($service in $services)
+[${service.name}]
+type = http
+local_port = ${service.localPort}
+custom_domains = ${service.domain}
+#访问地址 http://${service.domain}:${visitPort}/
+
+#end

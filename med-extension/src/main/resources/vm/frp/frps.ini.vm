@@ -1,0 +1,22 @@
+[common]
+# frp监听的端口，
+bind_port = ${bindPort}
+# 授权码
+token = ${token}
+
+#客户端访问端口
+vhost_http_port = ${visitPort}
+
+# frp管理后台端口
+dashboard_port = ${dashboardPort}
+# frp管理后台用户名和密码
+dashboard_user = ${dashboardUser}
+dashboard_pwd = ${dashboardPwd}
+
+#开启prometheus
+enable_prometheus = true
+
+# frp日志配置
+log_file = /var/log/frps.log
+log_level = info
+log_max_days = 3
