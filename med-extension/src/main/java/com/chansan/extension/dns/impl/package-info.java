@@ -30,7 +30,7 @@ class AliDnsConfig{
 
     static {
         CONFIG = new Config();
-        CONFIG.setAccessKeyId("LTAI5t6DCDoUAdjpU3q5XJSJ").setAccessKeySecret("H1ZgVTUSAWETIBhSdJRe2umIZoHfXh");
+        CONFIG.setAccessKeyId("").setAccessKeySecret("");
     }
 
     public static Config getConfig(){
