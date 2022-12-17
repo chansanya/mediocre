@@ -13,6 +13,10 @@ ext {
             druidVersion = '1.2.15',
             alidnsVersion = '3.0.1',
             velocityVersion = '2.3',
+            //https://commons.apache.org/
+            commonsExecVersion = '1.3',
+            commonsIoVersion = '2.11.0',
+            commonsCodecVersion = '1.15',
 
     ]
     lib = [
@@ -20,6 +24,7 @@ ext {
             "hutool": "cn.hutool:hutool-all:${hutoolVersion}",
             "alidns": "com.aliyun:alidns20150109:${alidnsVersion}",
             "velocity": "org.apache.velocity:velocity-engine-core:${velocityVersion}",
+            "commons-exec":"org.apache.commons:commons-exec:${commonsExecVersion}"
     ]
 }
 
