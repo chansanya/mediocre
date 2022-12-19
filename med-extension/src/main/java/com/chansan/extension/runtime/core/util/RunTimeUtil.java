@@ -1,4 +1,4 @@
-package com.chansan.extension.runtime.util;
+package com.chansan.extension.runtime.core.util;
 
 import java.io.ByteArrayOutputStream;
 import java.text.MessageFormat;
@@ -12,17 +12,18 @@ import org.apache.commons.exec.ExecuteResultHandler;
 import org.apache.commons.exec.ExecuteWatchdog;
 import org.apache.commons.exec.PumpStreamHandler;
 
-import com.chansan.extension.runtime.config.CommandConfig;
+import com.chansan.extension.runtime.core.config.CommandConfig;
+
 
 /**
  * @name: RunTimeUtil
  * @author: leihuangyan
- * @classPath: com.chansan.extension.runtime.util.RunTimeUtil
+ * @classPath: com.chansan.extension.runtime.core.util.RunTimeUtil
  * @date: 2022/12/17
  * @description: 运行
  */
-@SuppressWarnings("unused")
-public class RunTimeUtil {
+//@SuppressWarnings("unused")
+public final  class RunTimeUtil {
 
     /**
      * 运行命令

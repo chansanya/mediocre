@@ -1,4 +1,4 @@
-package com.chansan.extension.runtime.impl;
+package com.chansan.extension.runtime.real;
 
 import java.io.File;
 import java.text.MessageFormat;
@@ -7,20 +7,21 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 import com.chansan.extension.exception.RealException;
-import com.chansan.extension.runtime.IRunTimeService;
-import com.chansan.extension.runtime.process.CopyVideoAudioProcess;
-import com.chansan.extension.runtime.process.GetVideoFrameProcess;
-import com.chansan.extension.runtime.process.MergeVideoFrameProcess;
-import com.chansan.extension.runtime.process.RepairVideoFrameProcess;
-import com.chansan.extension.runtime.process.VideoFpsProcess;
-import com.chansan.extension.runtime.real.RealModel;
 import com.chansan.extension.runtime.real.enums.Model;
+import com.chansan.extension.runtime.real.process.CopyVideoAudioProcess;
+import com.chansan.extension.runtime.real.process.GetVideoFrameProcess;
+import com.chansan.extension.runtime.real.process.MergeVideoFrameProcess;
+import com.chansan.extension.runtime.real.process.RepairVideoFrameProcess;
+import com.chansan.extension.runtime.real.process.VideoFpsProcess;
+import com.chansan.extension.runtime.real.service.IRunTimeService;
+import com.chansan.extension.runtime.real.service.impl.IRunTimeServiceImpl;
+import com.chansan.extension.runtime.real.util.ChainBuilder;
 import com.chansan.extension.runtime.real.util.CmdGenUtil;
 
 /**
  * @name: IRunTimeServiceImplTest
  * @author: leihuangyan
- * @classPath: com.chansan.extension.runtime.impl.IRunTimeServiceImplTest
+ * @classPath: com.chansan.extension.runtime.core.impl.IRunTimeServiceImplTest
  * @date: 2022/12/17
  * @description:
  */
@@ -30,10 +31,11 @@ class IRunTimeServiceImplTest {
 
     private static  final  String rootPath = "E:\\Users\\yf\\Downloads\\pdf\\test\\realesrgan-ncnn-vulkan-20220424-windows";
 
-    private static  final  String videoPath = MessageFormat.format("{0}\\demo1.mp4", rootPath);
+//    private static  final  String videoPath = MessageFormat.format("{0}\\demo1.mp4", rootPath);
+    private static  final  String videoPath = MessageFormat.format("{0}\\demo.mp4", rootPath);
 
-    private static  final  String uuid = UUID.randomUUID().toString().replace("-","");
-//    private static  final  String uuid = "b8bbbf1e82ce48ccb2d1945a20be3a28";
+//    private static  final  String uuid = UUID.randomUUID().toString().replace("-","");
+    private static  final  String uuid = "9acef43c0ac34a2da56f3873269ee072";
 
     private static  final  String tempDirPath = MessageFormat.format("{0}\\tmp_frames\\{1}\\",rootPath,uuid);
     private static  final  String outDirPath = MessageFormat.format("{0}\\out_frames\\{1}\\",rootPath,uuid);
@@ -64,9 +66,7 @@ class IRunTimeServiceImplTest {
         System.out.println("当前命令:"+cmd);
         runTimeService.img(cmd);
 
-        while (true){
-
-        }
+        stop();
 
     }
 
@@ -100,6 +100,21 @@ class IRunTimeServiceImplTest {
 
 
     @Test
+    public void videoService() throws InterruptedException {
+        ChainBuilder build = ChainBuilder.builder()
+                .rootPath(rootPath)
+                .video(new File(videoPath))
+                .tempDir(new File(tempDirPath))
+                .outDir(new File(outDirPath))
+                .outVideo(new File(outVideoPath))
+                .outAudioVideo(new File(outAudioVideoPath))
+                .build();
+
+        runTimeService.video(build);
+
+        stop();
+    }
+
     public void video() throws InterruptedException {
 
 

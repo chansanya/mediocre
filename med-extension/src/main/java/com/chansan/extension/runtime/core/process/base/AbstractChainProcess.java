@@ -1,17 +1,18 @@
-package com.chansan.extension.runtime.process.base;
+package com.chansan.extension.runtime.core.process.base;
 
 import java.util.Optional;
 import java.util.function.Consumer;
 
-import com.chansan.extension.runtime.util.RunTimeUtil;
+import com.chansan.extension.runtime.core.util.RunTimeUtil;
 
 /**
  * @name: AbstractFileProcess
  * @author: leihuangyan
- * @classPath: com.chansan.extension.runtime.process.AbstractFileProcess
+ * @classPath: com.chansan.extension.runtime.core.process.AbstractFileProcess
  * @date: 2022/12/19
  * @description: 链式处理器
  */
+@SuppressWarnings("unused")
 public abstract  class AbstractChainProcess {
     /**
      * 下一道程序
@@ -61,7 +62,7 @@ public abstract  class AbstractChainProcess {
     protected  void success(String result){
         handelCmd(result);
         Optional.ofNullable(next).ifPresent(AbstractChainProcess::exec);
-    };
+    }
 
     /**
      * 程序错误时处理
@@ -69,7 +70,7 @@ public abstract  class AbstractChainProcess {
      */
     protected  void error(String error){
         System.out.println("程序执行失败:"+ error);
-    };
+    }
 
     /**
      * 处理当前命令， 如果当前命令需要根据上一个命令结果变更时，可以重写此方法
@@ -77,7 +78,7 @@ public abstract  class AbstractChainProcess {
      */
     protected  void handelCmd(String result){
 
-    };
+    }
 
     /**
      * 设置下一个程序
@@ -112,4 +113,5 @@ public abstract  class AbstractChainProcess {
     public void setAsync(boolean async) {
         this.async = async;
     }
+
 }

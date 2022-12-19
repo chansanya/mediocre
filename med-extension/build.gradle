@@ -3,6 +3,7 @@ dependencies {
     implementation "${lib."velocity"}"
     implementation "${lib."commons-exec"}"
     implementation "${lib."commons-lang3"}"
+    implementation "${lib."commons-io"}"
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'

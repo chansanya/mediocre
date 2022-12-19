@@ -1,9 +1,9 @@
-package com.chansan.extension.runtime.process.base;
+package com.chansan.extension.runtime.core.process.base;
 
 /**
  * @name: AbstractFileProcess
  * @author: leihuangyan
- * @classPath: com.chansan.extension.runtime.process.AbstractFileProcess
+ * @classPath: com.chansan.extension.runtime.core.process.AbstractFileProcess
  * @date: 2022/12/19
  * @description: 单个处理器
  */

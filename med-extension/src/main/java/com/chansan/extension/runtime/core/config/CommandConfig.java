@@ -1,4 +1,4 @@
-package com.chansan.extension.runtime.config;
+package com.chansan.extension.runtime.core.config;
 
 import java.util.function.Consumer;
 
@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 /**
  * @name: CommandConfig
  * @author: leihuangyan
- * @classPath: com.chansan.extension.runtime.config.CommandConfig
+ * @classPath: com.chansan.extension.runtime.core.config.CommandConfig
  * @date: 2022/12/19
  * @description:
  */

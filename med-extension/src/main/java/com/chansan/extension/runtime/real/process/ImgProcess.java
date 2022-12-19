@@ -1,11 +1,11 @@
-package com.chansan.extension.runtime.process;
+package com.chansan.extension.runtime.real.process;
 
-import com.chansan.extension.runtime.process.base.AbstractSingleProcess;
+import com.chansan.extension.runtime.core.process.base.AbstractSingleProcess;
 
 /**
  * @name: ImgProcess
  * @author: leihuangyan
- * @classPath: com.chansan.extension.runtime.process.ImgProcess
+ * @classPath: com.chansan.extension.runtime.real.process.ImgProcess
  * @date: 2022/12/19
  * @description:
  */

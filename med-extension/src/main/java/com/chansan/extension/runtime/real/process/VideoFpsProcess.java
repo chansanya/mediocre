@@ -1,15 +1,15 @@
-package com.chansan.extension.runtime.process;
+package com.chansan.extension.runtime.real.process;
 
-import com.chansan.extension.runtime.process.base.AbstractChainProcess;
+import com.chansan.extension.runtime.core.process.base.AbstractFileProcess;
 
 /**
  * @name: VideoFpsProcess
  * @author: leihuangyan
- * @classPath: com.chansan.extension.runtime.process.VideoFpsProcess
+ * @classPath: com.chansan.extension.runtime.real.process.VideoFpsProcess
  * @date: 2022/12/19
  * @description: 得到视频fps，这个类很离谱, 不过处理过也没啥问题，先用着
  */
-public final class VideoFpsProcess extends AbstractChainProcess {
+public final class VideoFpsProcess extends AbstractFileProcess {
 
     /**
      * video fps
