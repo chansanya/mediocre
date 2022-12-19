@@ -13,5 +13,11 @@ public interface IRunTimeService {
      * 执行命令
      * @param cmd cmd
      */
-    void exec(String cmd);
+    void img(String cmd);
+
+    /**
+     * 视频
+     * @param cmd cmd
+     */
+    void video(String cmd);
 }

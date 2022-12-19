@@ -1,14 +1,14 @@
 package com.chansan.extension.runtime.impl;
 
 import com.chansan.extension.runtime.IRunTimeService;
-import com.chansan.extension.runtime.util.RunTimeUtil;
+import com.chansan.extension.runtime.process.ImgProcess;
 
 /**
  * @name: IRunTimeServiceImpl
  * @author: leihuangyan
  * @classPath: com.chansan.extension.runtime.impl.IRunTimeServiceImpl
  * @date: 2022/12/17
- * @description:
+ * @description: process
  */
 public class IRunTimeServiceImpl implements IRunTimeService {
 
@@ -18,10 +18,18 @@ public class IRunTimeServiceImpl implements IRunTimeService {
      * @param cmd cmd
      */
     @Override
-    public void exec(String cmd) {
+    public void img(String cmd) {
+        new ImgProcess(cmd).exec();
+    }
 
-//        RunTimeUtil.run(cmd);
-        RunTimeUtil.runAsync(cmd);
+    /**
+     * 视频
+     *
+     * @param cmd cmd
+     */
+    @Override
+    public void video(String cmd) {
+
 
     }
 }

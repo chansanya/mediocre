@@ -6,9 +6,16 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
+import com.chansan.extension.exception.RealException;
 import com.chansan.extension.runtime.IRunTimeService;
+import com.chansan.extension.runtime.process.CopyVideoAudioProcess;
+import com.chansan.extension.runtime.process.GetVideoFrameProcess;
+import com.chansan.extension.runtime.process.MergeVideoFrameProcess;
+import com.chansan.extension.runtime.process.RepairVideoFrameProcess;
+import com.chansan.extension.runtime.process.VideoFpsProcess;
 import com.chansan.extension.runtime.real.RealModel;
 import com.chansan.extension.runtime.real.enums.Model;
+import com.chansan.extension.runtime.real.util.CmdGenUtil;
 
 /**
  * @name: IRunTimeServiceImplTest
@@ -21,6 +28,17 @@ class IRunTimeServiceImplTest {
 
     IRunTimeService runTimeService = new IRunTimeServiceImpl();
 
+    private static  final  String rootPath = "E:\\Users\\yf\\Downloads\\pdf\\test\\realesrgan-ncnn-vulkan-20220424-windows";
+
+    private static  final  String videoPath = MessageFormat.format("{0}\\demo1.mp4", rootPath);
+
+    private static  final  String uuid = UUID.randomUUID().toString().replace("-","");
+//    private static  final  String uuid = "b8bbbf1e82ce48ccb2d1945a20be3a28";
+
+    private static  final  String tempDirPath = MessageFormat.format("{0}\\tmp_frames\\{1}\\",rootPath,uuid);
+    private static  final  String outDirPath = MessageFormat.format("{0}\\out_frames\\{1}\\",rootPath,uuid);
+    private static  final  String outVideoPath = MessageFormat.format("{0}\\target\\{1}.mp4", rootPath, uuid);
+    private static  final  String outAudioVideoPath = MessageFormat.format("{0}\\target\\audio-{1}.mp4", rootPath, uuid);
 
     @Test
     public void run(){
@@ -44,7 +62,7 @@ class IRunTimeServiceImplTest {
 //        String cmd = "java --version";
 
         System.out.println("当前命令:"+cmd);
-        runTimeService.exec(cmd);
+        runTimeService.img(cmd);
 
         while (true){
 
@@ -73,13 +91,85 @@ class IRunTimeServiceImplTest {
 
         System.out.println("执行命令:"+cmd);
 
-        runTimeService.exec(cmd);
+        runTimeService.img(cmd);
 
-        while (true){
-
-        }
+        stop();
 
     }
 
+
+
+    @Test
+    public void video() throws InterruptedException {
+
+
+
+        File tempDir = new File(tempDirPath);
+        if(!tempDir.exists()){
+            boolean mkdir = tempDir.mkdirs();
+            System.out.printf("创建文件夹:%s => %b",tempDir,mkdir);
+            System.out.println();
+        }
+
+
+        File outDir = new File(outDirPath);
+        if(!outDir.exists()){
+            boolean mkdir = outDir.mkdirs();
+            System.out.printf("创建文件夹:%s => %b",outDir,mkdir);
+            System.out.println();
+        }
+
+        File video = new File(videoPath);
+        if(!video.exists()){
+           throw new RealException("文件:{0}不存在",videoPath);
+        }
+
+        File outVideo = new File(outVideoPath);
+        File outAudioVideo = new File(outAudioVideoPath);
+
+        VideoFpsProcess videoFpsProcess = new VideoFpsProcess(CmdGenUtil.getVideoFpsCmd(new File(videoPath)));
+        videoFpsProcess.exec();
+        Thread.sleep(3000);
+        String fps = videoFpsProcess.getFps();
+        System.out.printf("视频的FPS:%s",fps);
+        System.out.println();
+
+        CopyVideoAudioProcess copyVideoAudioProcess = new CopyVideoAudioProcess(
+                null,CmdGenUtil.copyVideoAudio(fps,video,outDir,outAudioVideo)
+        );
+
+        MergeVideoFrameProcess mergeVideoFrameProcess = new MergeVideoFrameProcess(
+                copyVideoAudioProcess,CmdGenUtil.mergeVideoFramesCmd(fps,outDir,outVideo)
+        );
+
+//        mergeVideoFrameProcess.exec();
+        RepairVideoFrameProcess repairVideoFrameProcess = new RepairVideoFrameProcess(
+                mergeVideoFrameProcess,CmdGenUtil.repairVideoFramesCmd(rootPath,tempDir,outDir)
+        );
+
+        GetVideoFrameProcess getVideoFrameProcess = new GetVideoFrameProcess(
+                repairVideoFrameProcess,CmdGenUtil.getVideoFramesCmd(video,tempDir)
+        );
+
+        getVideoFrameProcess.exec();
+
+        stop();
+    }
+
+    @Test
+    public void getFps(){
+        VideoFpsProcess videoFpsProcess = new VideoFpsProcess(CmdGenUtil.getVideoFpsCmd(new File(videoPath)));
+        videoFpsProcess.exec();
+        System.out.printf("视频的FPS:%s",videoFpsProcess.getFps());
+        stop();
+    }
+
+
+
+    private static void stop() {
+        while (true){
+
+        }
+    }
 
 }

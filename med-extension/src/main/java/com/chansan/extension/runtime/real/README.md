@@ -15,27 +15,16 @@ Command:
 
 Commands for enhancing anime vide[README_ubuntu.md](..%2Frealesrgan-ncnn-vulkan-20220424-ubuntu%2FREADME_ubuntu.md)os:
 
-1. Use ffmpeg to extract frames from a video (Remember to create the folder `tmp_frames` ahead)
+```shell
+ffmpeg -i onepiece_demo.mp4 -qscale:v 1 -qmin 1 -qmax 1 -vsync 0 tmp_frames/frame%08d.jpg
+    
+realesrgan-ncnn-vulkan.exe -i tmp_frames -o out_frames -n realesr-animevideov3 -s 2 -f jpg -v
+    
+ffmpeg -i out_frames/frame%08d.jpg -i onepiece_demo.mp4 -map 0:v:0 -map 1:a:0 -c:a copy -c:v libx264 -r 23.98 -pix_fmt yuv420p output_w_audio.mp4
 
-    ffmpeg -i onepiece_demo.mp4 -qscale:v 1 -qmin 1 -qmax 1 -vsync 0 tmp_frames/frame%08d.jpg
 
-2. Inference with Real-ESRGAN executable file (Remember to create the folder `out_frames` ahead)
+realesrgan-ncnn-vulkan.exe -i E:\Users\yf\Downloads\pdf\test\realesrgan-ncnn-vulkan-20220424-windows\tmp_frames\3b3940f5-aba6-4a10-8dfc-3604ade7e0d8/frame00000026.png -o  E:\Users\yf\Downloads\pdf\test\realesrgan-ncnn-vulkan-20220424-windows\out_frames\3b3940f5-aba6-4a10-8dfc-3604ade7e0d8/frame00000026.jpg -n realesr-animevideov3 -s 2 -f jpg
+```
 
-    ./realesrgan-ncnn-vulkan.exe -i tmp_frames -o out_frames -n realesr-animevideov3 -s 2 -f jpg
 
-3. Merge the enhanced frames back into a video
-
-    ffmpeg -i out_frames/frame%08d.jpg -i onepiece_demo.mp4 -map 0:v:0 -map 1:a:0 -c:a copy -c:v libx264 -r 23.98 -pix_fmt yuv420p output_w_audio.mp4
-
-------------------------
-
-GitHub: https://github.com/xinntao/Real-ESRGAN/
-Paper: https://arxiv.org/abs/2107.10833
-
-------------------------
-
-This executable file is **portable** and includes all the binaries and models required. No CUDA or PyTorch environment is needed.
-
-Note that it may introduce block inconsistency (and also generate slightly different results from the PyTorch implementation), because this executable file first crops the input image into several tiles, and then processes them separately, finally stitches together.
-
-This executable file is based on the wonderful [Tencent/ncnn](https://github.com/Tencent/ncnn) and [realsr-ncnn-vulkan](https://github.com/nihui/realsr-ncnn-vulkan) by [nihui](https://github.com/nihui).
+   

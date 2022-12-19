@@ -31,7 +31,7 @@ public class CmdGenUtil {
 
 
     public static String getExecPath(String rootPath){
-        return MessageFormat.format("{0}/realesrgan-ncnn-vulkan.exe",rootPath);
+        return MessageFormat.format("{0}\\realesrgan-ncnn-vulkan.exe",rootPath);
     }
 
     /**
@@ -90,7 +90,7 @@ public class CmdGenUtil {
     /**
      * 第一步:得到视频帧
      * 参考命令
-     * ffmpeg -i onepiece_demo.mp4 -qscale:v 1 -qmin 1 -qmax 1 -vsync 0 tmp_frames/frame%08d.png
+     * ffmpeg -i demo.mp4 -qscale:v 1 -qmin 1 -qmax 1 -vsync 0 tmp_frames/frame%08d.png
      *
      * @param video   视频
      * @param tempDir 视频帧 临时文件夹
@@ -179,7 +179,7 @@ public class CmdGenUtil {
      */
     public static String copyVideoAudio(String fps, File video, File outDir, File outVideo) {
         return MessageFormat.format("ffmpeg -r {0} -i {1}/frame%08d.jpg -i {2} -map 0:v:0 -map 1:a:0 -c:a copy -c:v libx264 -r {3} -pix_fmt yuv420p {4}",
-                fps, outVideo.getAbsolutePath(), video.getAbsolutePath(), fps, outDir.getAbsolutePath()
+                fps, outDir.getAbsolutePath(), video.getAbsolutePath(), fps, outVideo.getAbsolutePath()
         );
     }
 
