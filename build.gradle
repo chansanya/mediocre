@@ -18,6 +18,8 @@ ext {
             commonsLang3Version = '3.12.0',
             commonsIoVersion = '2.11.0',
             commonsCodecVersion = '1.15',
+            itextVersion = '7.2.4',
+            bcprovVersion = '1.68',
 
     ]
     lib = [
@@ -27,7 +29,9 @@ ext {
             "velocity": "org.apache.velocity:velocity-engine-core:${velocityVersion}",
             "commons-exec":"org.apache.commons:commons-exec:${commonsExecVersion}",
             "commons-lang3":"org.apache.commons:commons-lang3:${commonsLang3Version}",
-            "commons-io":"commons-io:commons-io:${commonsIoVersion}"
+            "commons-io":"commons-io:commons-io:${commonsIoVersion}",
+            "itext7":"com.itextpdf:itext7-core:${itextVersion}",
+            "bcprov":"org.bouncycastle:bcprov-jdk15on:${bcprovVersion}"
     ]
 }
 
