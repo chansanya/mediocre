@@ -1,7 +1,9 @@
 package com.chansan.extension.itext;
 
 
+import java.awt.FontMetrics;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -13,6 +15,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 
+import javax.swing.JLabel;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 
@@ -23,7 +27,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.itextpdf.io.font.PdfEncodings;
 import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.colors.Color;
 import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.kernel.colors.DeviceRgb;
+import com.itextpdf.kernel.events.IEventHandler;
+import com.itextpdf.kernel.events.PdfDocumentEvent;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.Rectangle;
@@ -211,26 +219,93 @@ public class PdfUtil2 {
     }
 
     public static void watermark(WatermarkModel watermarkModel) throws Exception{
-//        OutputStream targetFileStream = watermarkModel.getTargetFileStream();
-//        PdfDocument pdfDocument = new PdfDocument(new PdfWriter(targetFileStream));
-        PdfDocument readPdfDocument = new PdfDocument(new PdfReader(watermarkModel.getSourceFileStream()));
+
+        initFont();
+
+//        PdfDocument pdfDocument = new PdfDocument(
+//                new PdfReader(watermarkModel.getSourceFileStream()),
+//                new PdfWriter(watermarkModel.getTargetFileStream())
+//        );
+//        Document  writeDocument = new Document(pdfDocument);
 
 
-        PdfDocument writePdfDocument = new PdfDocument(new PdfWriter(watermarkModel.getTargetFileStream()));
-        Document  writeDocument = new Document(writePdfDocument);
+        String path  = "E:\\Users\\yf\\Downloads\\pdf\\tagger.pdf";
 
-        int numberOfPdfObjects = readPdfDocument.getNumberOfPages();
-        log.info("PDF页数:{}",numberOfPdfObjects);
+        FileOutputStream outputStream = new FileOutputStream(new File(path));
 
-        if(watermarkModel.isCenter()){
-            extracted(watermarkModel,writeDocument,watermarkModel.getPageNumber(),readPdfDocument);
-            return;
+//        PdfWriter pdfWriter = new PdfWriter(        watermarkModel.getTargetFileStream());
+        PdfWriter pdfWriter = new PdfWriter(        outputStream);
+        PdfDocument outDocument = new PdfDocument(pdfWriter);
+
+        PdfReader pdfReader = new PdfReader(watermarkModel.getSourceFileStream());
+        PdfDocument redDocument = new PdfDocument(pdfReader);
+
+        int numberOfPdfObjects = redDocument.getNumberOfPages();
+        System.out.println("PDF页数"+numberOfPdfObjects);
+
+        WaterMarkHandler waterMarkHandler = new WaterMarkHandler("这是一个水印");
+        outDocument.addEventHandler(PdfDocumentEvent.INSERT_PAGE, waterMarkHandler);
+        //获取总页数
+        int numberOfPages = redDocument.getNumberOfPages();
+        for (int i = 1; i <= numberOfPages; i++) {
+            PdfPage page = redDocument.getPage(i);
+            //复制每页内容添加到新的文件中
+            outDocument.addPage(page.copyTo(outDocument));
         }
-        for (int i = 1; i <= numberOfPdfObjects; i++) {
-            extracted(watermarkModel, writeDocument,i, readPdfDocument);
-        }
+
+
+//
+//        if(watermarkModel.isCenter()){
+//            extracted(watermarkModel,writeDocument,watermarkModel.getPageNumber(),pdfDocument);
+//            return;
+//        }
+//        for (int i = 1; i <= numberOfPdfObjects; i++) {
+//            extracted(watermarkModel, writeDocument,i, pdfDocument);
+//        }
 
     }
+
+    /**
+     * 监听事件 添加水印
+     */
+    protected static class WaterMarkHandler implements IEventHandler {
+
+        private String waterMarkContent = "";
+
+        public WaterMarkHandler(String str){
+            this.waterMarkContent = str;
+        }
+
+        @Override
+        public void handleEvent(com.itextpdf.kernel.events.Event event) {
+            PdfDocumentEvent documentEvent = (PdfDocumentEvent) event;
+            PdfDocument document = documentEvent.getDocument();
+            PdfPage page = documentEvent.getPage();
+            Rectangle pageSize = page.getPageSize();
+
+            JLabel label = new JLabel();
+            label.setText(this.waterMarkContent);
+            FontMetrics metrics = label.getFontMetrics(label.getFont());
+            int textHeight = metrics.getHeight();
+            int textWidth = metrics.stringWidth(label.getText());
+
+
+            //Canvas对象过期了，可以使用Document对象
+            Document document1 = new Document(document)
+                    .setFont(FONT)   //设置字体
+                    .setFontColor(Color.convertRgbToCmyk(new DeviceRgb(java.awt.Color.LIGHT_GRAY)))  //字体颜色
+                    .setFontSize(16);   //字体大小
+            //循环添加水印-posX表示横向起始位置，从左向右。posY表示纵向起始位置，从下到上。
+            for(float posX = 75f; posX < pageSize.getWidth(); posX = posX + textWidth * 3){
+                for(float posY = 50f; posY < pageSize.getHeight(); posY = posY + textHeight * 4){
+                    /*document1.showTextAligned(new Paragraph(this.waterMarkContent), posX, posY, document.getPageNumber(page),
+                            TextAlignment.CENTER, VerticalAlignment.MIDDLE, 145);*/
+                    document1.showTextAligned(this.waterMarkContent,posX,posY,TextAlignment.CENTER, 145f);
+                }
+            }
+        }
+    }
+
 
     private static void extracted(WatermarkModel model,Document document,int index, PdfDocument pdfDocument) {
         PdfPage page = pdfDocument.getPage(index);
@@ -249,10 +324,7 @@ public class PdfUtil2 {
 
         System.out.println("pdf 宽:"+width);
         System.out.println("pdf 高:"+height);
-//            float left = pageSize.getLeft();
-//            float right = pageSize.getRight();
-//            float top = pageSize.getTop();
-//            float bottom = pageSize.getBottom();
+
         //水印内容
         Paragraph watermarkContent = new Paragraph(model.getContent())
                 .setFont(FONT)

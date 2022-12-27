@@ -1,5 +1,6 @@
 package com.chansan.extension.itext;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,12 +91,15 @@ class PdfUtil2Test {
 
     @Test
     public void watermark() throws Exception {
+        File file = new File("E:\\Users\\yf\\Downloads\\pdf\\tagger.pdf");
+        System.out.println(file.exists());
+
         PdfUtil2.watermark(PdfUtil2.WatermarkModel.builder()
                 .sourceFileStream(PdfSignUtil.getFileInputStream(SOURCE_FILE))
-                .targetFileStream(PdfSignUtil.getFileOutStream(TAGGER_FILE))
+                .targetFileStream(PdfSignUtil.getFileOutStream("E:\\Users\\yf\\Downloads\\pdf\\tagger.pdf"))
                 .content("有方信息")
-                .fontSize(60).
-                rotate(180)
+                .fontSize(60)
+                .rotate(180)
                 .pageNumber(1)
                 .center(true)
                 .x(595-100).y(842-100)
