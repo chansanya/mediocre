@@ -25,3 +25,5 @@
 * **security**
   * WebSecurityConfigurerAdapter 移除,[参考](https://docs.spring.io/spring-security/reference/whats-new.html)
 > 持续集成中。。。
+
+- [数据结构](https://github.com/chansanya/mediocre/blob/master/med-extension/src/main/java/com/chansan/extension/study/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.md)
