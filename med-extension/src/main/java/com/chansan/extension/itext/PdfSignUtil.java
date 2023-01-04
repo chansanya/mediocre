@@ -107,7 +107,7 @@ public class PdfSignUtil {
             appearance.setRenderingMode(PdfSignatureAppearance.RenderingMode.GRAPHIC);
 
 
-            //提供加密
+            //提供加密 亲戚
             Security.addProvider(new BouncyCastleProvider());
 
             //秘钥库
